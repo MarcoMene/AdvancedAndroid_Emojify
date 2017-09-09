@@ -46,7 +46,8 @@ import timber.log.Timber;
 
 public class MainActivity extends AppCompatActivity {
 
-
+    // ciao da mm
+    
     private static final int REQUEST_IMAGE_CAPTURE = 1;
     private static final int REQUEST_STORAGE_PERMISSION = 1;
 
