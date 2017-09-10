@@ -16,6 +16,8 @@ import com.google.android.gms.vision.face.FaceDetector;
 
 public class Emojifier {
 
+    public static final String LOG_TAG = Emojifier.class.getSimpleName();
+
     public static void detectFaces(Context context, Bitmap bitmap) {
 
         // detect faces + log number of
@@ -30,13 +32,15 @@ public class Emojifier {
 
         int nFaces = faces.size();
 
-        Log.i("Emojifier", nFaces + " faces detected in this pic.");
+        Log.i(LOG_TAG, nFaces + " faces detected in this pic.");
         Toast.makeText(context, nFaces + " faces detected in this pic.", Toast.LENGTH_SHORT).show();
 
         // if no faces --> Toast
         if (nFaces < 1) {
             Toast.makeText(context, "No faces detected in this pic.", Toast.LENGTH_SHORT).show();
         }
+
+        detector.release();  // NB you should release the resource once used
 
 
     }
