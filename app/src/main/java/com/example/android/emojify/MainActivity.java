@@ -52,7 +52,7 @@ public class MainActivity extends AppCompatActivity {
 
     private static final String FILE_PROVIDER_AUTHORITY = "com.example.android.fileprovider";
 
-    @BindView(R.id.title) ImageView mImageView;
+    @BindView(R.id.image_view) ImageView mImageView;
 
     @BindView(R.id.emojify_button) Button mEmojifyButton;
     @BindView(R.id.share_button) FloatingActionButton mShareFab;
@@ -233,7 +233,7 @@ public class MainActivity extends AppCompatActivity {
      * OnClick for the clear button, resets the app to original state.
      *
      */
-    @OnClick(R.id.image_view)
+    @OnClick(R.id.clear_button)
     public void clearImage() {
         // Clear the image and toggle the view visibility
         mImageView.setImageResource(0);
