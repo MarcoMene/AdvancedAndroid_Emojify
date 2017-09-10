@@ -18,6 +18,8 @@ package com.example.android.emojify;
 
 import android.content.Context;
 import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.graphics.drawable.Drawable;
 import android.util.Log;
 import android.util.SparseArray;
 import android.widget.Toast;
@@ -39,9 +41,9 @@ class Emojifier {
      * @param context The application context.
      * @param picture The picture in which to detect the faces.
      */
-    static void detectFaces(Context context, Bitmap picture) {
+    static Bitmap detectFacesAndOverlayEmoji(Context context, Bitmap picture) {
 
-        // TODO (3): Change the name of the detectFaces() method to detectFacesAndOverlayEmoji() and the return type from void to Bitmap
+        // TODO (3): Change the name of the detectFacesAndOverlayEmoji() method to detectFacesAndOverlayEmoji() and the return type from void to Bitmap
 
         // Create the face detector, disable tracking and enable classifications
         FaceDetector detector = new FaceDetector.Builder(context)
@@ -56,7 +58,7 @@ class Emojifier {
         SparseArray<Face> faces = detector.detect(frame);
 
         // Log the number of faces
-        Log.d(LOG_TAG, "detectFaces: number of faces = " + faces.size());
+        Log.d(LOG_TAG, "detectFacesAndOverlayEmoji: number of faces = " + faces.size());
 
         // TODO (7): Create a variable called resultBitmap and initialize it to the original picture bitmap passed into the detectFacesAndOverlayEmoji() method
         // If there are no faces detected, show a Toast message
@@ -68,10 +70,18 @@ class Emojifier {
             for (int i = 0; i < faces.size(); ++i) {
                 Face face = faces.valueAt(i);
                 // Get the appropriate emoji for each face
-                whichEmoji(face);
+
 
                 // TODO (4): Create a variable called emojiBitmap to hold the appropriate Emoji bitmap and remove the call to whichEmoji()
+                Drawable emojiBitmap;
+
                 // TODO (5): Create a switch statement on the result of the whichEmoji() call, and assign the proper emoji bitmap to the variable you created
+                Emoji emojy_chosen = whichEmoji(face);
+                switch (emojy_chosen){
+                    case SMILE:
+                        emojiBitmap = BitmapFactory.decodeResource(R.drawable.smile, 0);
+                        break;
+                }
                 // TODO (8): Call addBitmapToFace(), passing in the resultBitmap, the emojiBitmap and the Face  object, and assigning the result to resultBitmap
 
             }
@@ -91,7 +101,7 @@ class Emojifier {
      * @param face The face for which you pick an emoji.
      */
 
-    private static void whichEmoji(Face face) {
+    private static Emoji whichEmoji(Face face) {
 
         // TODO (1): Change the return type of the whichEmoji() method from void to Emoji.
         // Log all the probabilities
@@ -135,6 +145,7 @@ class Emojifier {
 
         // Log the chosen Emoji
         Log.d(LOG_TAG, "whichEmoji: " + emoji.name());
+        return emoji;
 
         // TODO (2): Have the method return the selected Emoji type.
     }
