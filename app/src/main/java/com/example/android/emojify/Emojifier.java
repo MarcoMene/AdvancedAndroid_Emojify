@@ -35,7 +35,7 @@ class Emojifier {
 
     private static final double SMILING_PROB_THRESHOLD = .15;
     private static final double EYE_OPEN_PROB_THRESHOLD = .5;
-    private static final float EMOJI_SCALE_FACTOR = (float) 1.0;
+    private static final float EMOJI_SCALE_FACTOR = (float) .9;
 
     /**
      * Method for detecting faces in a bitmap.
