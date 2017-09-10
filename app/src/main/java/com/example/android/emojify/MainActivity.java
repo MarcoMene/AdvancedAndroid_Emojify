@@ -41,6 +41,7 @@ import java.io.IOException;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import butterknife.OnClick;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -51,8 +52,7 @@ public class MainActivity extends AppCompatActivity {
 
     private static final String FILE_PROVIDER_AUTHORITY = "com.example.android.fileprovider";
 
-    @BindView(R.id.title)
-    ImageView mImageView;
+    @BindView(R.id.title) ImageView mImageView;
 
     @BindView(R.id.emojify_button) Button mEmojifyButton;
     @BindView(R.id.share_button) FloatingActionButton mShareFab;
@@ -205,6 +205,7 @@ public class MainActivity extends AppCompatActivity {
      *
      * @param view The save button.
      */
+    @OnClick(R.id.save_button)
     public void saveMe(View view) {
         // Delete the temporary image file
         BitmapUtils.deleteImageFile(this, mTempPhotoPath);
@@ -218,6 +219,7 @@ public class MainActivity extends AppCompatActivity {
      *
      * @param view The share button.
      */
+    @OnClick(R.id.share_button)
     public void shareMe(View view) {
         // Delete the temporary image file
         BitmapUtils.deleteImageFile(this, mTempPhotoPath);
@@ -234,6 +236,7 @@ public class MainActivity extends AppCompatActivity {
      *
      * @param view The clear button.
      */
+    @OnClick(R.id.image_view)
     public void clearImage(View view) {
         // Clear the image and toggle the view visibility
         mImageView.setImageResource(0);
