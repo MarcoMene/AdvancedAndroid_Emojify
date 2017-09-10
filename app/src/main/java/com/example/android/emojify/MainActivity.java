@@ -39,6 +39,9 @@ import android.widget.Toast;
 import java.io.File;
 import java.io.IOException;
 
+import butterknife.BindView;
+import butterknife.ButterKnife;
+
 public class MainActivity extends AppCompatActivity {
 
     // TODO (2): Replace all View declarations with Butterknife annotations
@@ -48,14 +51,15 @@ public class MainActivity extends AppCompatActivity {
 
     private static final String FILE_PROVIDER_AUTHORITY = "com.example.android.fileprovider";
 
-    private ImageView mImageView;
+    @BindView(R.id.title)
+    ImageView mImageView;
 
-    private Button mEmojifyButton;
-    private FloatingActionButton mShareFab;
-    private FloatingActionButton mSaveFab;
-    private FloatingActionButton mClearFab;
+    @BindView(R.id.emojify_button) Button mEmojifyButton;
+    @BindView(R.id.share_button) FloatingActionButton mShareFab;
+    @BindView(R.id.save_button) FloatingActionButton mSaveFab;
+    @BindView(R.id.clear_button) FloatingActionButton mClearFab;
 
-    private TextView mTitleTextView;
+    @BindView(R.id.title_text_view) TextView mTitleTextView;
 
     private String mTempPhotoPath;
 
@@ -69,12 +73,13 @@ public class MainActivity extends AppCompatActivity {
 
         // TODO (3): Replace the findViewById calls with the Butterknife data binding
         // Bind the views
-        mImageView = (ImageView) findViewById(R.id.image_view);
-        mEmojifyButton = (Button) findViewById(R.id.emojify_button);
-        mShareFab = (FloatingActionButton) findViewById(R.id.share_button);
-        mSaveFab = (FloatingActionButton) findViewById(R.id.save_button);
-        mClearFab = (FloatingActionButton) findViewById(R.id.clear_button);
-        mTitleTextView = (TextView) findViewById(R.id.title_text_view);
+        ButterKnife.bind(this);
+//        mImageView = (ImageView) findViewById(R.id.image_view);
+//        mEmojifyButton = (Button) findViewById(R.id.emojify_button);
+//        mShareFab = (FloatingActionButton) findViewById(R.id.share_button);
+//        mSaveFab = (FloatingActionButton) findViewById(R.id.save_button);
+//        mClearFab = (FloatingActionButton) findViewById(R.id.clear_button);
+//        mTitleTextView = (TextView) findViewById(R.id.title_text_view);
     }
 
     /**
@@ -100,7 +105,7 @@ public class MainActivity extends AppCompatActivity {
 
     @Override
     public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions,
-            @NonNull int[] grantResults) {
+                                           @NonNull int[] grantResults) {
         // Called when you request permission to read and write to external storage
         switch (requestCode) {
             case REQUEST_STORAGE_PERMISSION: {
@@ -183,7 +188,7 @@ public class MainActivity extends AppCompatActivity {
 
         // Resample the saved image to fit the ImageView
         mResultsBitmap = BitmapUtils.resamplePic(this, mTempPhotoPath);
-        
+
 
         // Detect the faces and overlay the appropriate emoji
         mResultsBitmap = Emojifier.detectFacesandOverlayEmoji(this, mResultsBitmap);
@@ -194,6 +199,7 @@ public class MainActivity extends AppCompatActivity {
 
 
     // TODO (4): Replace OnClick methods with Butterknife annotations for OnClicks
+
     /**
      * OnClick method for the save button.
      *
